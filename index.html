@@ -288,6 +288,24 @@
             /* .homePage-machine-mobile styles are already defined above for mobile, ensure they are correct */
             /* .homePage-machine-desktop should remain display: none; */
         }
+
+        .pre-order-product-image {
+            object-fit: cover; /* Ensures the image covers the allocated space while maintaining aspect ratio */
+        }
+
+        .desktop-only-product-display .pre-order-product-image {
+            width: 340px; /* Increased from 450px */
+            height: 340px; /* Increased from 450px */
+            object-fit: cover;
+            display: block; /* Ensures proper block-level behavior */
+        }
+
+        .mobile-only-product-display .pre-order-product-image {
+            width: 360px; /* Increased from 300px */
+            height: 360px; /* Increased from 300px */
+            object-fit: cover;
+            display: block; /* Ensures proper block-level behavior */
+        }
     </style>
 
     <!-- Noscript for critical fonts (comes after the preload for those fonts) -->
@@ -564,8 +582,10 @@
         <div class="pre-order-container">
             <!-- Product display for desktop -->
             <div class="product-display desktop-only-product-display">
-                <img alt="MyMiniSlot Machine pre-order view" class="pre-order-product-image"
-                    src="image/Home__7_-removebg-preview.webp" width="600" height="600">
+                <div class="product-image-container">
+                    <img alt="MyMiniSlot Machine pre-order view" class="pre-order-product-image"
+                        src="image/1.jpg" width="450" height="450">
+                </div>
                 <div class="product-buttons">
                 </div>
                 <div class="view-360">
@@ -612,8 +632,10 @@
 
                 <!-- Product display for mobile -->
                 <div class="product-display mobile-only-product-display">
-                    <img alt="MyMiniSlot Machine pre-order mobile view" class="pre-order-product-image"
-                        src="image/Home__7_-removebg-preview.webp" width="400" height="400">
+                    <div class="product-image-container">
+                        <img alt="MyMiniSlot Machine pre-order mobile view" class="pre-order-product-image"
+                            src="image/1.jpg" width="300" height="300">
+                    </div>
                     <div class="product-buttons">
                     </div>
                     <div class="view-360">
@@ -886,6 +908,118 @@
                     }
                 });
             }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageContainers = document.querySelectorAll('.product-image-container');
+            const imageBaseName = 'image/';
+            const imageCount = 14;
+            const images = [];
+            for (let i = 1; i <= imageCount; i++) {
+                images.push(`${imageBaseName}${i}.jpg`);
+            }
+
+            imageContainers.forEach(container => {
+                const productImage = container.querySelector('.pre-order-product-image');
+                if (!productImage) return;
+
+                let currentIndex = 0;       // Current visible image index
+                let initialDragIndex = 0;   // Image index at the start of a drag
+                let isDragging = false;
+                let startX = 0;           // Mouse/touch X position at the start of a drag
+
+                // Preload images
+                images.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
+
+                const updateImage = (newIndex) => {
+                    let normalizedIndex = newIndex % images.length;
+                    if (normalizedIndex < 0) {
+                        normalizedIndex += images.length;
+                    }
+
+                    if (images[normalizedIndex] && productImage.src !== images[normalizedIndex]) {
+                        productImage.src = images[normalizedIndex];
+                    }
+                    currentIndex = normalizedIndex;
+                };
+                
+                // Initialize with the first image
+                if (images.length > 0) {
+                    productImage.src = images[0];
+                    currentIndex = 0;
+                }
+
+                const handleDragStart = (clientX) => {
+                    isDragging = true;
+                    startX = clientX;
+                    initialDragIndex = currentIndex;
+                    container.style.cursor = 'grabbing';
+                    document.body.classList.add('is-dragging-360');
+                };
+
+                const handleDragMove = (clientX) => {
+                    if (!isDragging) return;
+
+                    const deltaX = clientX - startX;
+                    const sensitivity = 25; // Pixels to drag to change one frame. Adjust as needed.
+                    
+                    const imageShift = Math.floor(deltaX / sensitivity);
+                    
+                    let newImageIndex = initialDragIndex + imageShift;
+                    updateImage(newImageIndex);
+                };
+
+                const handleDragEnd = () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        container.style.cursor = 'grab';
+                        document.body.classList.remove('is-dragging-360');
+                    }
+                };
+
+                container.addEventListener('mousedown', (e) => {
+                    handleDragStart(e.clientX);
+                    e.preventDefault(); // Prevent default image drag behavior
+                });
+
+                container.addEventListener('touchstart', (e) => {
+                    if (e.touches.length > 0) {
+                        handleDragStart(e.touches[0].clientX);
+                        // For touch, e.preventDefault() might interfere with scrolling if not careful.
+                        // Test if it's needed. If dragging also scrolls, then add it.
+                        // e.preventDefault(); 
+                    }
+                }, { passive: true }); // passive:true is generally good for touchstart for scroll performance
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging) {
+                        handleDragMove(e.clientX);
+                    }
+                });
+
+                document.addEventListener('touchmove', (e) => {
+                    if (isDragging && e.touches.length > 0) {
+                        handleDragMove(e.touches[0].clientX);
+                         // If drag interaction is primary, you might want to prevent default scroll here
+                        // e.preventDefault(); 
+                    }
+                }, { passive: false }); // Set passive to false if you intend to call preventDefault
+
+                document.addEventListener('mouseup', handleDragEnd);
+                document.addEventListener('touchend', handleDragEnd);
+                
+                // Also end drag if mouse leaves element container OR the window itself
+                container.addEventListener('mouseleave', handleDragEnd); 
+                document.addEventListener('mouseleave', handleDragEnd);
+
+
+                // Set initial cursor
+                container.style.cursor = 'grab';
+            });
         });
     </script>
 </body>
