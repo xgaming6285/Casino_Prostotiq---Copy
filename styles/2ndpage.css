@@ -268,7 +268,7 @@ body {
     overflow: visible;
     position: relative;
   }
-
+  
   .product-container {
     width: 100%;
     flex-direction: column;
@@ -506,6 +506,20 @@ body {
   .label-text {
     font-size: 11px;
     padding: 4px 12px;
+  }
+
+  .cta {
+    position: absolute;
+    bottom: -71%;
+    right: -20%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    z-index: 3;
+    background-color: rgba(41, 44, 56, .8);
+    padding: 8px 50px;
+    border-radius: 9999px
   }
 }
 
