@@ -300,9 +300,17 @@
             display: block; /* Ensures proper block-level behavior */
         }
 
+        .mobile-only-product-display .product-image-container {
+            width: 80%; /* Reduced from 100% to make the spinner smaller */
+            right: 10%;
+            margin: 0 auto; /* Center the container */
+        }
+
         .mobile-only-product-display .pre-order-product-image {
-            width: 360px; /* Increased from 300px */
-            height: 360px; /* Increased from 300px */
+            width: 100%; /* Make image responsive to container width */
+            height: auto; /* Maintain aspect ratio */
+            
+            aspect-ratio: 1 / 1; /* Ensure it's a square */
             object-fit: cover;
             display: block; /* Ensures proper block-level behavior */
         }
