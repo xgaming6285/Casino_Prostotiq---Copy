@@ -380,11 +380,10 @@ html {
     }
 
     .view-icon {
-        width: 45px;
-        height: 35px;
-        cursor: pointer;
-        margin-top: 90px;
-        margin-right: 485px;
+        width: 35px;
+        height: 25px;
+        margin-top: 20px;
+        margin-right: 0;
     }
 }
 
@@ -758,6 +757,13 @@ html {
     .pre-order-product-image {
         max-width: 100%
     }
+
+    .view-icon {
+        width: 45px!important;
+        height: 35px!important;
+        margin-top: 10%!important;
+        margin-left: -30%!important;
+    }
 }
 
 @media (max-width:480px) {
@@ -869,7 +875,6 @@ html {
     cursor: pointer;
     background-color: transparent;
     box-shadow: none;
-    top: -100px
 }
 
 .view-360:hover {
@@ -1284,6 +1289,13 @@ section#experience .logo-pragmatic {
         font-family: Montserrat;
         letter-spacing: .075em;
         text-wrap: nowrap
+    }
+
+    .view-icon {
+        width: 35px;
+        height: 25px;
+        margin-top: 20px;
+        margin-right: 10px;
     }
 }
 
@@ -1815,6 +1827,13 @@ svg.product-svg {
         content-visibility: visible;
         contain-intrinsic-size: 600px 360px
     }
+
+    .view-icon {
+        width: 45px!important;
+        height: 35px!important;
+        margin-top: 10%!important;
+        margin-left: -40%!important;
+    }
 }
 
 @media (min-width:769px) {
@@ -1851,4 +1870,21 @@ body.is-dragging-360 {
     /* For Firefox */
     -ms-user-select: none;
     /* For Internet Explorer/Edge */
+}
+
+.view-icon {
+    width: 45px;
+    height: 35px;
+    cursor: pointer;
+    margin-top: 90px;
+    margin-right: 85px;
+}
+
+@media (min-width: 768px) {
+    .view-icon {
+        width: 45px;
+        height: 35px;
+        margin-top: 10%;
+        margin-left: 27%;
+    }
 }
