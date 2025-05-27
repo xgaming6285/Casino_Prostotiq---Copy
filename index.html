@@ -321,7 +321,6 @@
         }
 
         .mobile-only-product-display .pre-order-product-image {
-            width: 100%;
             height: auto;
             aspect-ratio: 1 / 1;
             object-fit: contain;
@@ -970,9 +969,11 @@
                         setTimeout(() => {
                             productImage.src = images[normalizedIndex];
                             productImage.onload = () => {
-                                productImage.classList.remove('transitioning');
+                                requestAnimationFrame(() => {
+                                    productImage.classList.remove('transitioning');
+                                });
                             };
-                        }, 150); // Half of the transition duration to ensure smooth crossfade
+                        }, 300); // Increased to better match the transition duration
                     }
                     currentIndex = normalizedIndex;
                 };

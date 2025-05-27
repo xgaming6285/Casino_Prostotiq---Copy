@@ -443,6 +443,13 @@ html {
     .logo-text {
         font-size: 2em
     }
+
+    .view-icon {
+        width: 45px !important;
+        height: 35px !important;
+        margin-top: 10% !important;
+        margin-left: -80% !important;
+    }
 }
 
 @media (max-width:900px) {
@@ -677,8 +684,9 @@ html {
     display: block;
     margin: 0 auto;
     border-radius: 8px;
-    transition: transform .3s, opacity 0.8s ease-in-out;
+    transition: transform .3s, opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 1;
+    will-change: opacity;
 }
 
 .pre-order-product-image.transitioning {
