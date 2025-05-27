@@ -653,8 +653,9 @@ html {
     padding: 0 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center
+    justify-content: center;
+    align-items: center;
+    gap: 2rem
 }
 
 .product-display {
@@ -663,8 +664,8 @@ html {
     align-items: center;
     margin-bottom: 2rem;
     position: relative;
-    flex: 1;
-    max-width: 30%;
+    flex: 0 1 auto;
+    max-width: 450px;
     margin: 0 auto;
     overflow: visible
 }
@@ -677,7 +678,12 @@ html {
     display: block;
     margin: 0 auto;
     border-radius: 8px;
-    transition: transform .3s
+    transition: transform .3s, opacity 0.8s ease-in-out;
+    opacity: 1;
+}
+
+.pre-order-product-image.transitioning {
+    opacity: 0;
 }
 
 @media (min-width:1200px) {
@@ -796,11 +802,12 @@ html {
 
 .pre-order-content {
     flex: 1;
-    text-align: right;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 20px
+    align-items: center;
+    gap: 20px;
+    max-width: 600px
 }
 
 .pre-order-header h2 {
@@ -1707,7 +1714,7 @@ body.logos-open section#experience .logo-slider-container {
         align-items: center;
         max-width: 80%;
         margin-bottom: -35px;
-        right: -10%
+        right: -0%
     }
 
     .mobile-only-product-display .view-360 {
@@ -1793,7 +1800,7 @@ svg.product-svg {
     }
 
     .mobile-only-product-display {
-        max-width: 90%
+        max-width: 80%
     }
 
     .pre-order-product-image {
@@ -1838,7 +1845,10 @@ svg.product-svg {
 
 body.is-dragging-360 {
     user-select: none;
-    -webkit-user-select: none; /* For Safari */
-    -moz-user-select: none;    /* For Firefox */
-    -ms-user-select: none;     /* For Internet Explorer/Edge */
+    -webkit-user-select: none;
+    /* For Safari */
+    -moz-user-select: none;
+    /* For Firefox */
+    -ms-user-select: none;
+    /* For Internet Explorer/Edge */
 }

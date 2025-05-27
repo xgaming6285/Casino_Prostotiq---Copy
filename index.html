@@ -295,34 +295,40 @@
         }
 
         .desktop-only-product-display .pre-order-product-image {
-            width: 340px;
-            /* Increased from 450px */
-            height: 340px;
-            /* Increased from 450px */
-            object-fit: cover;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
             display: block;
-            /* Ensures proper block-level behavior */
+            max-width: none;
+            aspect-ratio: 1 / 1;
+        }
+
+        .desktop-only-product-display .product-image-container {
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            overflow: visible;
         }
 
         .mobile-only-product-display .product-image-container {
-            width: 80%;
-            /* Reduced from 100% to make the spinner smaller */
-            right: 10%;
+            width: 100%;
+            /* Changed from 80% to ensure full width */
             margin: 0 auto;
             /* Center the container */
+            position: relative;
+            overflow: visible;
+            /* Changed from default to ensure image is not cut */
         }
 
         .mobile-only-product-display .pre-order-product-image {
             width: 100%;
-            /* Make image responsive to container width */
             height: auto;
-            /* Maintain aspect ratio */
-
             aspect-ratio: 1 / 1;
-            /* Ensure it's a square */
-            object-fit: cover;
+            object-fit: contain;
+            /* Changed from cover to ensure full image is visible */
             display: block;
-            /* Ensures proper block-level behavior */
+            max-width: none;
+            /* Remove max-width constraint */
         }
     </style>
 
@@ -960,7 +966,13 @@
                     }
 
                     if (images[normalizedIndex] && productImage.src !== images[normalizedIndex]) {
-                        productImage.src = images[normalizedIndex];
+                        productImage.classList.add('transitioning');
+                        setTimeout(() => {
+                            productImage.src = images[normalizedIndex];
+                            productImage.onload = () => {
+                                productImage.classList.remove('transitioning');
+                            };
+                        }, 150); // Half of the transition duration to ensure smooth crossfade
                     }
                     currentIndex = normalizedIndex;
                 };
