@@ -290,29 +290,39 @@
         }
 
         .pre-order-product-image {
-            object-fit: cover; /* Ensures the image covers the allocated space while maintaining aspect ratio */
+            object-fit: cover;
+            /* Ensures the image covers the allocated space while maintaining aspect ratio */
         }
 
         .desktop-only-product-display .pre-order-product-image {
-            width: 340px; /* Increased from 450px */
-            height: 340px; /* Increased from 450px */
+            width: 340px;
+            /* Increased from 450px */
+            height: 340px;
+            /* Increased from 450px */
             object-fit: cover;
-            display: block; /* Ensures proper block-level behavior */
+            display: block;
+            /* Ensures proper block-level behavior */
         }
 
         .mobile-only-product-display .product-image-container {
-            width: 80%; /* Reduced from 100% to make the spinner smaller */
+            width: 80%;
+            /* Reduced from 100% to make the spinner smaller */
             right: 10%;
-            margin: 0 auto; /* Center the container */
+            margin: 0 auto;
+            /* Center the container */
         }
 
         .mobile-only-product-display .pre-order-product-image {
-            width: 100%; /* Make image responsive to container width */
-            height: auto; /* Maintain aspect ratio */
-            
-            aspect-ratio: 1 / 1; /* Ensure it's a square */
+            width: 100%;
+            /* Make image responsive to container width */
+            height: auto;
+            /* Maintain aspect ratio */
+
+            aspect-ratio: 1 / 1;
+            /* Ensure it's a square */
             object-fit: cover;
-            display: block; /* Ensures proper block-level behavior */
+            display: block;
+            /* Ensures proper block-level behavior */
         }
     </style>
 
@@ -402,30 +412,30 @@
             <div class="main-container">
                 <div class="product-container">
                     <svg class="product-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet"
-                        style="width:100%;height:auto;display:block;">
+                        style="width:100%;height:auto;display:block;overflow:visible;">
 
                         <image alt="MyMiniSlot device features view" class="product-image-homepage"
                             href="image/machine.png.webp" x="0" y="0" width="1000" height="1000" />
 
                         {/* <!-- High-Res Display Line and Point --> */}
                         <line id="line-high-res" class="animated-line" x1="60" y1="275" x2="470" y2="275" stroke="white"
-                            stroke-width="2" />
+                            stroke-width="2" vector-effect="non-scaling-stroke" />
                         <circle id="circle-high-res" cx="470" cy="275" r="7" fill="white" /> {/* <!-- Added ID --> */}
 
                         {/* <!-- Forged in Metal Line and Point --> */}
                         <line id="line-forged-metal" class="animated-line" x1="-20" y1="420" x2="340" y2="420"
-                            stroke="white" stroke-width="2" />
+                            stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
                         <circle id="circle-forged-metal" cx="340" cy="420" r="7" fill="white" /> {/* <!-- Added ID -->
                         */}
 
                         {/* <!-- Providers Line and Point --> */}
                         <line id="line-providers" class="animated-line" x1="-90" y1="550" x2="280" y2="550"
-                            stroke="white" stroke-width="2" />
+                            stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
                         <circle id="circle-providers" cx="280" cy="550" r="7" fill="white" /> {/* <!-- Added ID --> */}
 
                         {/* <!-- Premium Buttons Line and Point --> */}
                         <line id="line-buttons" class="animated-line" x1="1000" y1="630" x2="710" y2="630"
-                            stroke="white" stroke-width="2" />
+                            stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
                         <circle id="circle-buttons" cx="710" cy="630" r="7" fill="white" /> {/* <!-- Added ID --> */}
 
                         {/* <!-- You can adjust the coordinates above to match your design --> */}
@@ -591,8 +601,8 @@
             <!-- Product display for desktop -->
             <div class="product-display desktop-only-product-display">
                 <div class="product-image-container">
-                    <img alt="MyMiniSlot Machine pre-order view" class="pre-order-product-image"
-                        src="image/1.png" width="450" height="450">
+                    <img alt="MyMiniSlot Machine pre-order view" class="pre-order-product-image" src="image/1.png"
+                        width="450" height="450">
                 </div>
                 <div class="product-buttons">
                 </div>
@@ -954,7 +964,7 @@
                     }
                     currentIndex = normalizedIndex;
                 };
-                
+
                 // Initialize with the first image
                 if (images.length > 0) {
                     productImage.src = images[0];
@@ -974,9 +984,9 @@
 
                     const deltaX = clientX - startX;
                     const sensitivity = 25; // Pixels to drag to change one frame. Adjust as needed.
-                    
+
                     const imageShift = Math.floor(deltaX / sensitivity);
-                    
+
                     let newImageIndex = initialDragIndex + imageShift;
                     updateImage(newImageIndex);
                 };
@@ -1012,16 +1022,16 @@
                 document.addEventListener('touchmove', (e) => {
                     if (isDragging && e.touches.length > 0) {
                         handleDragMove(e.touches[0].clientX);
-                         // If drag interaction is primary, you might want to prevent default scroll here
+                        // If drag interaction is primary, you might want to prevent default scroll here
                         // e.preventDefault(); 
                     }
                 }, { passive: false }); // Set passive to false if you intend to call preventDefault
 
                 document.addEventListener('mouseup', handleDragEnd);
                 document.addEventListener('touchend', handleDragEnd);
-                
+
                 // Also end drag if mouse leaves element container OR the window itself
-                container.addEventListener('mouseleave', handleDragEnd); 
+                container.addEventListener('mouseleave', handleDragEnd);
                 document.addEventListener('mouseleave', handleDragEnd);
 
 
